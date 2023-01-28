@@ -13,7 +13,7 @@ import { UsersModule } from './apis/users/users.module';
       port: 3306,
       username: 'root',
       password: '0000',
-      database: 'myproject03',
+      database: 'bobfull',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
