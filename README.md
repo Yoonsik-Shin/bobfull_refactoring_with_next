@@ -148,3 +148,12 @@ $ yarn add @nestjs/jwt passport-jwt
 $ yarn add --dev @types/passport-jwt
 ```
 
+
+
+passport 모듈
+
+```bash
+$ yarn add @nestjs/passport
+$ yarn add passport
+```
+

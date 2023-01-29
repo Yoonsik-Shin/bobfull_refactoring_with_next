@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { AuthGuard } from '@nestjs/passport/dist';
 
 @Controller('users')
 export class UsersController {
@@ -26,9 +29,10 @@ export class UsersController {
     });
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Get('/login')
+  @UseGuards(AuthGuard('myGuard'))
+  fetchUser(@Request() req) {
+    console.log(req);
   }
 
   // @Get(':id')

@@ -25,7 +25,7 @@ export class UsersService {
     if (user) throw new ConflictException('이미 등록된 이메일입니다.');
 
     const userProfileSave = await this.userProfileRepository.save({});
-    console.log(userProfileSave);
+
     const userSave = await this.userRepository.save({
       email,
       password,
