@@ -12,7 +12,7 @@ import {
 import { UserProfile } from './user.profile.entity';
 
 @Entity()
-@Unique(['email'])
+@Unique(['email', 'nickname'])
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -23,7 +23,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: '익명의밥알' })
+  @Column({ default: `익명의밥알` })
   nickname: string;
 
   @CreateDateColumn()

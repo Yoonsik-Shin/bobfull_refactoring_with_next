@@ -4,12 +4,16 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { UserProfile } from './entities/user.profile.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    @InjectRepository(UserProfile)
+    private readonly userProfileRepository: Repository<UserProfile>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -20,27 +24,30 @@ export class UsersService {
 
     if (user) throw new ConflictException('이미 등록된 이메일입니다.');
 
-    return await this.userRepository.save({
+    const userProfileSave = await this.userProfileRepository.save({});
+    console.log(userProfileSave);
+    const userSave = await this.userRepository.save({
       email,
       password,
+      userprofile: userProfileSave,
     });
+
+    return userSave;
   }
 
   findAll() {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne({ email }) {
+    return await this.userRepository.findOne({ where: { email } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number) {
     return `This action updates a #${id} user`;
   }
 
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
-
-  
 }

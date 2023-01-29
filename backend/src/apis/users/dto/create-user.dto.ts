@@ -1,4 +1,5 @@
 import { IsString } from 'class-validator';
+import { UserProfile } from '../entities/user.profile.entity';
 
 export class CreateUserDto {
   @IsString()
@@ -6,4 +7,6 @@ export class CreateUserDto {
 
   @IsString()
   password: string;
+
+  userProfile: UserProfile;
 }
