@@ -58,7 +58,7 @@
 - accessToken이 만료시 자동으로 refreshToken을 이용해 새로운 accessToken을 받아와 인가되도록 구현
 - `recoil`과 `react-query`를 활용하여 로그인 계정 상태관리 구현
 
-​   
+   
 
 #### 1-3. 개발일지
 
@@ -137,6 +137,16 @@ Recoil
 ```bash
 $ yarn add recoil
 ```
+
+
+
+react-hook-form with yup
+
+```bash
+$ yarn add @hookform/resolvers yup
+```
+
+
 
 
 
