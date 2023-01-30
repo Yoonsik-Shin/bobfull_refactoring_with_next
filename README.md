@@ -58,7 +58,7 @@
 - accessToken이 만료시 자동으로 refreshToken을 이용해 새로운 accessToken을 받아와 인가되도록 구현
 - `recoil`과 `react-query`를 활용하여 로그인 계정 상태관리 구현
 
-
+​   
 
 #### 1-3. 개발일지
 
@@ -132,6 +132,12 @@ $ git config --local core.editor "code --wait"
 
 ##### FrontEnd
 
+Recoil
+
+```bash
+$ yarn add recoil
+```
+
 
 
 ##### BackEnd
@@ -155,5 +161,17 @@ passport 모듈
 ```bash
 $ yarn add @nestjs/passport
 $ yarn add passport
+```
+
+환경변수
+
+```bash
+$ yarn add dotenv
+```
+
+```js
+import 'dotenv/config'
+
+process.env.환경변수명
 ```
 
