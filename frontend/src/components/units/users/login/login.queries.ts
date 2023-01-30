@@ -12,6 +12,7 @@ export const onClickSubmit =
         method: "post",
         url: `${BASE_URL}/auth`,
         data: data,
+        withCredentials: true,
       });
 
       const accessToken = result.data;
@@ -23,7 +24,7 @@ export const onClickSubmit =
         return;
       }
       setAccessToken(accessToken);
-      alert("엑세스토큰 저장됨");
+      alert("로그인에 성공하셨습니다.");
 
       // 3. 로그인 성공페이지로 이동하기
       void router.push("/");

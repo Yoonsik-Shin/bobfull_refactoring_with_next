@@ -21,13 +21,18 @@ export class AuthService {
     );
 
     // 로컬
-    res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
-
-    // 배포환경
-    // res.setHeader('Access-Control-Allow-Origin', 'https://myfrontsite.com')
     // res.setHeader(
     //   'Set-Cookie',
-    //   `refreshToken=${refreshToken}; path=/; domain=.mybacksite.com; SameSite=None; Secure; httpOnly;`
-    // )
+    //   `refreshToken=${refreshToken}; path=/; SameSite=None;`,
+    // );
+    // res.send();
+
+    // 배포환경
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001'); // front
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader(
+      'Set-Cookie',
+      `refreshToken=${refreshToken}; path=/; SameSite=None; Secure; httpOnly;`,
+    );
   }
 }

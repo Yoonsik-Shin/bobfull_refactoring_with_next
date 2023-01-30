@@ -20,7 +20,7 @@ export class AuthController {
   @Post()
   async login(
     @Body() authDto: AuthDto, //
-    @Res() res: any,
+    @Res({ passthrough: true }) res: any,
   ) {
     const { email, password } = authDto;
 

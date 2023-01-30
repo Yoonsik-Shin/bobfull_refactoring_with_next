@@ -21,7 +21,9 @@ let AuthService = class AuthService {
     }
     setRefreshToken({ user, res }) {
         const refreshToken = this.jwtService.sign({ email: user.email, sub: user.id }, { secret: 'myRefreshKey', expiresIn: '2w' });
-        res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; SameSite=None; Secure; httpOnly;`);
     }
 };
 AuthService = __decorate([
