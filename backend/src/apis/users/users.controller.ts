@@ -31,7 +31,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(AuthGuard('myGuard'))
-  fetchUser(@Request() req) {
+  fetchUser(@Request() req: any) {
     console.log(req);
   }
 

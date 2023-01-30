@@ -6,4 +6,5 @@ export declare class AuthController {
     private readonly userService;
     constructor(authService: AuthService, userService: UsersService);
     login(authDto: AuthDto, res: any): Promise<string>;
+    restoreAccessToken(req: any): void;
 }

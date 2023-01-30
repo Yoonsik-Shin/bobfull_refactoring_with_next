@@ -15,6 +15,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../users/entities/user.entity");
 const users_service_1 = require("../users/users.service");
 const user_profile_entity_1 = require("../users/entities/user.profile.entity");
+const jwt_refresh_strategy_1 = require("../../commons/auth/jwt-refresh-strategy");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -27,6 +28,7 @@ AuthModule = __decorate([
         providers: [
             auth_service_1.AuthService,
             users_service_1.UsersService,
+            jwt_refresh_strategy_1.JwtRefreshStrategy,
         ],
     })
 ], AuthModule);
