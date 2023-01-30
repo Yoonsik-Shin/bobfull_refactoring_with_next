@@ -23,7 +23,7 @@ let AuthController = class AuthController {
         this.authService = authService;
         this.userService = userService;
     }
-    async login(authDto) {
+    async login(authDto, res) {
         const { email, password } = authDto;
         const user = await this.userService.findOne({ email });
         if (!user)
@@ -31,14 +31,16 @@ let AuthController = class AuthController {
         const isAuth = await bcrypt.compare(password, user.password);
         if (!isAuth)
             throw new common_1.UnprocessableEntityException('암호가 틀렸습니다.');
+        this.authService.setRefreshToken({ user, res });
         return this.authService.getAccessToken({ user });
     }
 };
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.AuthDto]),
+    __metadata("design:paramtypes", [auth_dto_1.AuthDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 AuthController = __decorate([

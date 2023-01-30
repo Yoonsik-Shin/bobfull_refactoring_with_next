@@ -19,6 +19,10 @@ let AuthService = class AuthService {
     getAccessToken({ user }) {
         return this.jwtService.sign({ email: user.email, sub: user.id }, { secret: 'myAccessKey', expiresIn: '1h' });
     }
+    setRefreshToken({ user, res }) {
+        const refreshToken = this.jwtService.sign({ email: user.email, sub: user.id }, { secret: 'myRefreshKey', expiresIn: '2w' });
+        res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
