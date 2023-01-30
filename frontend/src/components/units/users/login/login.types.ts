@@ -1,8 +1,15 @@
 import * as yup from "yup";
+import { NextRouter } from "next/router";
+import { SetterOrUpdater } from "recoil";
 
 export interface IFormData {
   email: string;
   password: string;
+}
+
+export interface IVariable {
+  router: NextRouter;
+  setAccessToken: SetterOrUpdater<string>;
 }
 
 export const schema = yup.object({
