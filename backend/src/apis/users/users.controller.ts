@@ -29,7 +29,7 @@ export class UsersController {
     });
   }
 
-  @Get('/login')
+  @Get()
   @UseGuards(AuthGuard('myGuard'))
   fetchUser(@Request() req) {
     console.log(req);

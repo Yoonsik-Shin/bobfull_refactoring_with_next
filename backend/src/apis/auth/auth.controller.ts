@@ -3,6 +3,7 @@ import {
   Post,
   Body,
   UnprocessableEntityException,
+  Res,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
@@ -17,7 +18,10 @@ export class AuthController {
   ) {}
 
   @Post()
-  async login(@Body() authDto: AuthDto) {
+  async login(
+    @Body() authDto: AuthDto, //
+    @Res() res: any,
+  ) {
     const { email, password } = authDto;
 
     // 1. 로그인 (이메일이 일치하는 유저를 DB에서 찾기)
@@ -31,7 +35,10 @@ export class AuthController {
     const isAuth = await bcrypt.compare(password, user.password);
     if (!isAuth) throw new UnprocessableEntityException('암호가 틀렸습니다.');
 
-    // 4. 모두 일치하면, accessToken(JWT)을 브라우저에 전송
+    // 4. refreshToken(JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
+    this.authService.setRefreshToken({ user, res });
+
+    // 5. 모두 일치하면, accessToken(JWT)을 브라우저에 전송
     return this.authService.getAccessToken({ user });
   }
 }

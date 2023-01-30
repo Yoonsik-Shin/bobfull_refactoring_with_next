@@ -5,4 +5,8 @@ export declare class AuthService {
     getAccessToken({ user }: {
         user: any;
     }): string;
+    setRefreshToken({ user, res }: {
+        user: any;
+        res: any;
+    }): void;
 }

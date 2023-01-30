@@ -19,15 +19,13 @@ const passport_jwt_1 = require("passport-jwt");
 const user_entity_1 = require("../../apis/users/entities/user.entity");
 const typeorm_2 = require("typeorm");
 const common_1 = require("@nestjs/common");
-const user_profile_entity_1 = require("../../apis/users/entities/user.profile.entity");
 let JwtAccessStrategy = class JwtAccessStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'myGuard') {
-    constructor(userRepositiory, userProfileRepository) {
+    constructor(userRepositiory) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: 'myAccessKey',
         });
         this.userRepositiory = userRepositiory;
-        this.userProfileRepository = userProfileRepository;
     }
     async validate(payload) {
         const { email } = payload;
@@ -42,9 +40,7 @@ let JwtAccessStrategy = class JwtAccessStrategy extends (0, passport_1.PassportS
 };
 JwtAccessStrategy = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __param(1, (0, typeorm_1.InjectRepository)(user_profile_entity_1.UserProfile)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], JwtAccessStrategy);
 exports.JwtAccessStrategy = JwtAccessStrategy;
 //# sourceMappingURL=jwt-access.strategy.js.map

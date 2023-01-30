@@ -39,7 +39,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)('/login'),
+    (0, common_1.Get)(),
     (0, common_1.UseGuards)((0, dist_1.AuthGuard)('myGuard')),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
