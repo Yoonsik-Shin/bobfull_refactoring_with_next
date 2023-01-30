@@ -4,11 +4,14 @@ import {
   Body,
   UnprocessableEntityException,
   Res,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
+import { Get, UseGuards } from '@nestjs/common/decorators';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -40,5 +43,13 @@ export class AuthController {
 
     // 5. 모두 일치하면, accessToken(JWT)을 브라우저에 전송
     return this.authService.getAccessToken({ user });
+  }
+
+  @Post('/restore')
+  @UseGuards(AuthGuard('refresh'))
+  restoreAccessToken(
+    @Req() req: any, //
+  ) {
+    console.log(req);
   }
 }

@@ -18,6 +18,8 @@ const users_service_1 = require("../users/users.service");
 const auth_service_1 = require("./auth.service");
 const auth_dto_1 = require("./dto/auth.dto");
 const bcrypt = require("bcrypt");
+const decorators_1 = require("@nestjs/common/decorators");
+const passport_1 = require("@nestjs/passport");
 let AuthController = class AuthController {
     constructor(authService, userService) {
         this.authService = authService;
@@ -34,6 +36,9 @@ let AuthController = class AuthController {
         this.authService.setRefreshToken({ user, res });
         return this.authService.getAccessToken({ user });
     }
+    restoreAccessToken(req) {
+        console.log(req);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -43,6 +48,14 @@ __decorate([
     __metadata("design:paramtypes", [auth_dto_1.AuthDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('/restore'),
+    (0, decorators_1.UseGuards)((0, passport_1.AuthGuard)('refresh')),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "restoreAccessToken", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

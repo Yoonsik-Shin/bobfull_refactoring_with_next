@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { UserProfile } from '../users/entities/user.profile.entity';
+import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserProfile } from '../users/entities/user.profile.entity';
   providers: [
     AuthService, //
     UsersService,
+    JwtRefreshStrategy,
   ],
 })
 export class AuthModule {}
