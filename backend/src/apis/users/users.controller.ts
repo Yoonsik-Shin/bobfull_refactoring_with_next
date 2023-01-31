@@ -32,7 +32,7 @@ export class UsersController {
   @Get()
   @UseGuards(AuthGuard('myGuard'))
   fetchUser(@Request() req: any) {
-    console.log(req);
+    return this.usersService.findOne({ email: req.user.email });
   }
 
   // @Get(':id')

@@ -8,5 +8,5 @@ export declare class UsersController {
         password: string;
         userprofile: import("./entities/user.profile.entity").UserProfile;
     } & import("./entities/user.entity").User>;
-    fetchUser(req: any): void;
+    fetchUser(req: any): Promise<import("./entities/user.entity").User>;
 }

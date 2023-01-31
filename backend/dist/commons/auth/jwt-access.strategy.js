@@ -33,6 +33,7 @@ let JwtAccessStrategy = class JwtAccessStrategy extends (0, passport_1.PassportS
             relations: ['userprofile'],
             where: { email },
         });
+        console.log(user);
         if (!user)
             throw new common_1.UnauthorizedException();
         return user;

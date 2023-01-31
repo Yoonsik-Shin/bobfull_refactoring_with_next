@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import LoginUI from "./login.presenter";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { accessTokenState } from "@/commons/store";
 
 export default function Login() {
@@ -11,7 +11,7 @@ export default function Login() {
     resolver: yupResolver(schema),
     // mode: "onChange", // 입력할때마다 입력검증
   });
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const setAccessToken = useSetRecoilState(accessTokenState);
   const router = useRouter();
 
   return (

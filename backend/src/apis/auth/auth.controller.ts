@@ -10,7 +10,7 @@ import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
-import { Get, UseGuards } from '@nestjs/common/decorators';
+import { UseGuards } from '@nestjs/common/decorators';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
@@ -20,7 +20,7 @@ export class AuthController {
     private readonly userService: UsersService,
   ) {}
 
-  @Post()
+  @Post('/login')
   async login(
     @Body() authDto: AuthDto, //
     @Res({ passthrough: true }) res: any,
@@ -50,6 +50,6 @@ export class AuthController {
   restoreAccessToken(
     @Req() req: any, //
   ) {
-    console.log(req);
+    return this.authService.getAccessToken({ user: req.user });
   }
 }
