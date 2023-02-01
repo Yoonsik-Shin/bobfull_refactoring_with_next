@@ -18,7 +18,6 @@ const users_service_1 = require("../users/users.service");
 const auth_service_1 = require("./auth.service");
 const auth_dto_1 = require("./dto/auth.dto");
 const bcrypt = require("bcrypt");
-const decorators_1 = require("@nestjs/common/decorators");
 const passport_1 = require("@nestjs/passport");
 let AuthController = class AuthController {
     constructor(authService, userService) {
@@ -39,6 +38,17 @@ let AuthController = class AuthController {
     restoreAccessToken(req) {
         return this.authService.getAccessToken({ user: req.user });
     }
+    async logoinGoogle(req, res) {
+        let user = await this.userService.findOne({ email: req.user.email });
+        if (!user) {
+            user = await this.userService.create({
+                email: req.user.email,
+                password: req.user.password,
+            });
+        }
+        this.authService.setRefreshToken({ user, res });
+        res.redirect('http://localhost:3001');
+    }
 };
 __decorate([
     (0, common_1.Post)('/login'),
@@ -50,12 +60,21 @@ __decorate([
 ], AuthController.prototype, "login", null);
 __decorate([
     (0, common_1.Post)('/restore'),
-    (0, decorators_1.UseGuards)((0, passport_1.AuthGuard)('refresh')),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('refresh')),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "restoreAccessToken", null);
+__decorate([
+    (0, common_1.Get)('/login/google'),
+    (0, common_1.UseGuards)(),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logoinGoogle", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

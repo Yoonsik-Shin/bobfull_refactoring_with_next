@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const auth_module_1 = require("./apis/auth/auth.module");
 const community_module_1 = require("./apis/communities/community.module");
@@ -30,6 +31,9 @@ AppModule = __decorate([
                 entities: [__dirname + '/apis/**/*.entity.*'],
                 synchronize: true,
                 logging: true,
+            }),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
             }),
         ],
     })

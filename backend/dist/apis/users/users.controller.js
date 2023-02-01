@@ -24,7 +24,6 @@ let UsersController = class UsersController {
     }
     async create(createUserDto) {
         const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-        console.log(createUserDto);
         return this.usersService.create(Object.assign(Object.assign({}, createUserDto), { password: hashedPassword }));
     }
     fetchUser(req) {

@@ -22,7 +22,7 @@ export class UsersController {
   @Post('/signup')
   async create(@Body() createUserDto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    console.log(createUserDto);
+
     return this.usersService.create({
       ...createUserDto,
       password: hashedPassword,

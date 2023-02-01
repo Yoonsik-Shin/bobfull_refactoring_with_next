@@ -5,13 +5,20 @@ import {
   UnprocessableEntityException,
   Res,
   Req,
+  Get,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
-import { UseGuards } from '@nestjs/common/decorators';
 import { AuthGuard } from '@nestjs/passport';
+import { Request, Response } from 'express';
+import { User } from '../users/entities/user.entity';
+
+interface IOAuthUser {
+  user: Pick<User, 'email' | 'password'>;
+}
 
 @Controller('auth')
 export class AuthController {
@@ -51,5 +58,28 @@ export class AuthController {
     @Req() req: any, //
   ) {
     return this.authService.getAccessToken({ user: req.user });
+  }
+
+  @Get('/login/google')
+  @UseGuards()
+  async logoinGoogle(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    // 1. 가입확인
+    let user = await this.userService.findOne({ email: req.user.email });
+
+    // 2. 가입되어있지 않으면, 회원가입
+    if (!user) {
+      user = await this.userService.create({
+        email: req.user.email,
+        password: req.user.password,
+      });
+    }
+
+    // 3. 로그인
+    this.authService.setRefreshToken({ user, res });
+
+    res.redirect('http://localhost:3001');
   }
 }
