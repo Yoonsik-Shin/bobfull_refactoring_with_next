@@ -1,5 +1,7 @@
+import { onClickSubmit } from "./signup.queries";
+
 export default function SignupUI(props) {
-  const { register, handleSubmit, formState, onClickSubmit } = props;
+  const { register, handleSubmit, formState } = props;
 
   return (
     <form onSubmit={handleSubmit(onClickSubmit)}>

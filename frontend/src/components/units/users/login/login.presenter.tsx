@@ -2,7 +2,8 @@ import { onClickSubmit } from "./login.queries";
 
 export default function LoginUI(props) {
   const { register, handleSubmit, formState, router, setAccessToken } = props;
-
+  // console.log(setAccessToken);
+  // console.log(typeof setAccessToken);
   return (
     <form onSubmit={handleSubmit(onClickSubmit({ router, setAccessToken }))}>
       이메일: <input type="text" {...register("email")} />

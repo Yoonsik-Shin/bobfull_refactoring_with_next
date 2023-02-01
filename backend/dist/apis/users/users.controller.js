@@ -28,7 +28,7 @@ let UsersController = class UsersController {
         return this.usersService.create(Object.assign(Object.assign({}, createUserDto), { password: hashedPassword }));
     }
     fetchUser(req) {
-        console.log(req);
+        return this.usersService.findOne({ email: req.user.email });
     }
 };
 __decorate([

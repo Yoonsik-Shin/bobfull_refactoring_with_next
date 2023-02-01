@@ -23,6 +23,7 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'myGuard') {
       where: { email },
     });
 
+    console.log(user);
     if (!user) throw new UnauthorizedException();
 
     return user;
