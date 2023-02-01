@@ -7,6 +7,7 @@ import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { UserProfile } from '../users/entities/user.profile.entity';
 import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
+import { JwtGoogleStrategy } from 'src/commons/auth/jwt-social-google.strategy';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
     AuthService, //
     UsersService,
     JwtRefreshStrategy,
+    JwtGoogleStrategy,
   ],
 })
 export class AuthModule {}

@@ -16,6 +16,7 @@ const user_entity_1 = require("../users/entities/user.entity");
 const users_service_1 = require("../users/users.service");
 const user_profile_entity_1 = require("../users/entities/user.profile.entity");
 const jwt_refresh_strategy_1 = require("../../commons/auth/jwt-refresh-strategy");
+const jwt_social_google_strategy_1 = require("../../commons/auth/jwt-social-google.strategy");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -29,6 +30,7 @@ AuthModule = __decorate([
             auth_service_1.AuthService,
             users_service_1.UsersService,
             jwt_refresh_strategy_1.JwtRefreshStrategy,
+            jwt_social_google_strategy_1.JwtGoogleStrategy,
         ],
     })
 ], AuthModule);
