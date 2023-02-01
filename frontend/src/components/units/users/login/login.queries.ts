@@ -1,19 +1,15 @@
-import axios from "axios";
+import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
 import { IFormData, IVariable } from "./login.types";
 
 export const onClickSubmit =
   ({ router, setAccessToken }: IVariable) =>
   async (data: IFormData) => {
-    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-    console.log(setAccessToken);
-    console.log(typeof setAccessToken);
     try {
       // 1. 로그인해서 accessToken 받아오기
-      const result = await axios({
+      const result = await authorizedAxios({
         method: "post",
-        url: `${BASE_URL}/auth/login`,
+        url: `/auth/login`,
         data: data,
-        withCredentials: true,
       });
 
       const accessToken = result.data;

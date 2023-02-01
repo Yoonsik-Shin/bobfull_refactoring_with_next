@@ -1,30 +1,34 @@
+import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
 import { accessTokenState } from "@/commons/store";
-import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 export default function TestPage() {
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   const onClickUserButton = async () => {
-    const resultUser = await axios({
-      method: "get",
-      url: `${BASE_URL}/users`,
-      headers: { Authorization: `Bearer ${accessToken}` },
-      withCredentials: true,
-    });
-    console.log(resultUser);
+    try {
+      const resultUser = await authorizedAxios({
+        method: "get",
+        url: `/users`,
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const onClickButton = async () => {
-    const result = await axios({
-      method: "post",
-      url: `${BASE_URL}/auth/restore`,
-      data: accessToken,
-      withCredentials: true,
-    });
-
-    console.log(result);
+  const refreshAccessToken = async () => {
+    try {
+      const result = await authorizedAxios({
+        method: "post",
+        url: `/auth/restore`,
+        data: accessToken,
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      setAccessToken(result.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const a = () => {
@@ -35,7 +39,7 @@ export default function TestPage() {
   return (
     <>
       <button onClick={onClickUserButton}>유저테스트버튼</button>
-      <button onClick={onClickButton}>테스트버튼</button>
+      <button onClick={refreshAccessToken}>테스트버튼</button>
       <button onClick={a}>테스트버튼</button>
       <br />
     </>
