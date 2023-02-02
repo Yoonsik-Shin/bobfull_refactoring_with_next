@@ -13,5 +13,6 @@ export declare class AuthController {
     login(authDto: AuthDto, res: any): Promise<string>;
     restoreAccessToken(req: any): string;
     logoinGoogle(req: Request & IOAuthUser, res: Response): Promise<void>;
+    logoinKakao(req: Request & IOAuthUser, res: Response): Promise<void>;
 }
 export {};

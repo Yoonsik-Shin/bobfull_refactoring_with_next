@@ -61,19 +61,46 @@ export class AuthController {
   }
 
   @Get('/login/google')
-  @UseGuards()
+  @UseGuards(AuthGuard('google'))
   async logoinGoogle(
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
+    const { email, password } = req.user;
+
     // 1. 가입확인
     let user = await this.userService.findOne({ email: req.user.email });
 
     // 2. 가입되어있지 않으면, 회원가입
     if (!user) {
       user = await this.userService.create({
-        email: req.user.email,
-        password: req.user.password,
+        email,
+        password,
+      });
+    }
+
+    // 3. 로그인
+    this.authService.setRefreshToken({ user, res });
+
+    res.redirect('http://localhost:3001');
+  }
+
+  @Get('/login/kakao')
+  @UseGuards(AuthGuard('kakao'))
+  async logoinKakao(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    const { email, password } = req.user;
+
+    // 1. 가입확인
+    let user = await this.userService.findOne({ email: req.user.email });
+
+    // 2. 가입되어있지 않으면, 회원가입
+    if (!user) {
+      user = await this.userService.create({
+        email,
+        password,
       });
     }
 
