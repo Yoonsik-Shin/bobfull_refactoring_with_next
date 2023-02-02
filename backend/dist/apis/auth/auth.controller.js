@@ -39,11 +39,24 @@ let AuthController = class AuthController {
         return this.authService.getAccessToken({ user: req.user });
     }
     async logoinGoogle(req, res) {
+        const { email, password } = req.user;
         let user = await this.userService.findOne({ email: req.user.email });
         if (!user) {
             user = await this.userService.create({
-                email: req.user.email,
-                password: req.user.password,
+                email,
+                password,
+            });
+        }
+        this.authService.setRefreshToken({ user, res });
+        res.redirect('http://localhost:3001');
+    }
+    async logoinKakao(req, res) {
+        const { email, password } = req.user;
+        let user = await this.userService.findOne({ email: req.user.email });
+        if (!user) {
+            user = await this.userService.create({
+                email,
+                password,
             });
         }
         this.authService.setRefreshToken({ user, res });
@@ -68,13 +81,22 @@ __decorate([
 ], AuthController.prototype, "restoreAccessToken", null);
 __decorate([
     (0, common_1.Get)('/login/google'),
-    (0, common_1.UseGuards)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('google')),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logoinGoogle", null);
+__decorate([
+    (0, common_1.Get)('/login/kakao'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('kakao')),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logoinKakao", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

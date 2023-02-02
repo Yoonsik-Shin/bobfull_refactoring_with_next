@@ -185,3 +185,11 @@ import 'dotenv/config'
 process.env.환경변수명
 ```
 
+
+
+nest에서 환경변수 선언
+
+```bash
+yarn add @nestjs/config
+```
+
