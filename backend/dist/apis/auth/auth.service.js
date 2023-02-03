@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const dist_1 = require("@nestjs/jwt/dist");
+const users_service_1 = require("../users/users.service");
 let AuthService = class AuthService {
-    constructor(jwtService) {
+    constructor(jwtService, userService) {
         this.jwtService = jwtService;
+        this.userService = userService;
     }
     getAccessToken({ user }) {
         return this.jwtService.sign({ email: user.email, sub: user.id }, { secret: 'myAccessKey', expiresIn: '1h' });
@@ -25,10 +27,23 @@ let AuthService = class AuthService {
         res.setHeader('Access-Control-Allow-Credentials', 'true');
         res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/; SameSite=None; Secure; httpOnly;`);
     }
+    async loginOAuth({ req, res }) {
+        const { email, password } = req.user;
+        let user = await this.userService.findOne({ email: req.user.email });
+        if (!user) {
+            user = await this.userService.create({
+                email,
+                password,
+            });
+        }
+        this.setRefreshToken({ user, res });
+        res.redirect('http://localhost:3001');
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [dist_1.JwtService])
+    __metadata("design:paramtypes", [dist_1.JwtService,
+        users_service_1.UsersService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

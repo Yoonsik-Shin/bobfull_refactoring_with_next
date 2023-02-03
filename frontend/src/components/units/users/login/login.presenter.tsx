@@ -20,7 +20,12 @@ export default function LoginUI(props) {
       <div>
         <a href={`${BASE_URL}/auth/login/google`}>구글로그인</a>
       </div>
-      <a href={`${BASE_URL}/auth/login/kakao`}>카카오로그인</a>
+      <div>
+        <a href={`${BASE_URL}/auth/login/kakao`}>카카오로그인</a>
+      </div>
+      <div>
+        <a href={`${BASE_URL}/auth/login/naver`}>네이버로그인</a>
+      </div>
     </>
   );
 }
