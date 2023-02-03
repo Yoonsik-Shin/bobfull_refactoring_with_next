@@ -9,6 +9,7 @@ import { UserProfile } from '../users/entities/user.profile.entity';
 import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
 import { JwtGoogleStrategy } from 'src/commons/auth/jwt-social-google.strategy';
 import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kako.strategy';
+import { JwtNaverStrategy } from 'src/commons/auth/jwt-social-naver.strategy';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kako.strategy';
     JwtRefreshStrategy,
     JwtGoogleStrategy,
     JwtKakaoStrategy,
+    JwtNaverStrategy,
   ],
 })
 export class AuthModule {}

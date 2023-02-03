@@ -173,7 +173,7 @@ $ yarn add @nestjs/passport
 $ yarn add passport
 ```
 
-환경변수
+ii환경변수
 
 ```bash
 $ yarn add dotenv
@@ -191,5 +191,14 @@ nest에서 환경변수 선언
 
 ```bash
 yarn add @nestjs/config
+```
+
+
+
+카카오 로그인
+
+```bash
+$ yarn add passport-kakao
+$ yarn add -D @types/passport-kakao
 ```
 

@@ -12,7 +12,8 @@ export declare class AuthController {
     constructor(authService: AuthService, userService: UsersService);
     login(authDto: AuthDto, res: any): Promise<string>;
     restoreAccessToken(req: any): string;
-    logoinGoogle(req: Request & IOAuthUser, res: Response): Promise<void>;
-    logoinKakao(req: Request & IOAuthUser, res: Response): Promise<void>;
+    loginGoogle(req: Request & IOAuthUser, res: Response): Promise<void>;
+    loginKakao(req: Request & IOAuthUser, res: Response): Promise<void>;
+    loginNaver(req: Request & IOAuthUser, res: Response): Promise<void>;
 }
 export {};

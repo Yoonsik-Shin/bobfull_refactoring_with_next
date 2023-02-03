@@ -62,51 +62,28 @@ export class AuthController {
 
   @Get('/login/google')
   @UseGuards(AuthGuard('google'))
-  async logoinGoogle(
+  async loginGoogle(
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    const { email, password } = req.user;
-
-    // 1. 가입확인
-    let user = await this.userService.findOne({ email: req.user.email });
-
-    // 2. 가입되어있지 않으면, 회원가입
-    if (!user) {
-      user = await this.userService.create({
-        email,
-        password,
-      });
-    }
-
-    // 3. 로그인
-    this.authService.setRefreshToken({ user, res });
-
-    res.redirect('http://localhost:3001');
+    this.authService.loginOAuth({ req, res });
   }
 
   @Get('/login/kakao')
   @UseGuards(AuthGuard('kakao'))
-  async logoinKakao(
+  async loginKakao(
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    const { email, password } = req.user;
+    this.authService.loginOAuth({ req, res });
+  }
 
-    // 1. 가입확인
-    let user = await this.userService.findOne({ email: req.user.email });
-
-    // 2. 가입되어있지 않으면, 회원가입
-    if (!user) {
-      user = await this.userService.create({
-        email,
-        password,
-      });
-    }
-
-    // 3. 로그인
-    this.authService.setRefreshToken({ user, res });
-
-    res.redirect('http://localhost:3001');
+  @Get('/login/naver')
+  @UseGuards(AuthGuard('naver'))
+  async loginNaver(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    this.authService.loginOAuth({ req, res });
   }
 }
