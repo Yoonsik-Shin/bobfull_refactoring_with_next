@@ -42,7 +42,10 @@ let UsersService = class UsersService {
         return `This action returns all users`;
     }
     async findOne({ email }) {
-        return await this.userRepository.findOne({ where: { email } });
+        return await this.userRepository.findOne({
+            where: { email },
+            relations: ['userprofile'],
+        });
     }
     update(id) {
         return `This action updates a #${id} user`;
