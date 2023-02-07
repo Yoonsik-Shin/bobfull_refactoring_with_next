@@ -40,7 +40,10 @@ export class UsersService {
   }
 
   async findOne({ email }) {
-    return await this.userRepository.findOne({ where: { email } });
+    return await this.userRepository.findOne({
+      where: { email },
+      relations: ['userprofile'],
+    });
   }
 
   update(id: number) {

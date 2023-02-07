@@ -48,3 +48,10 @@ const result = await axios({
   withCredentials: true,
 });
 ```
+
+
+
+
+
+- **SyntaxError****:** **Cannot use import statement outside a module**
+  - 정의되지 않은 함수를 import 하려고 하였음 
