@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport/dist';
+import multer from 'multer';
 
 @Controller('users')
 export class UsersController {
@@ -35,6 +36,11 @@ export class UsersController {
     return this.usersService.findOne({ email: req.user.email });
   }
 
+  @Post()
+  uploadProfileImg(@Request() req: any) {
+    const upload = multer();
+    return this.usersService.profileImgUpload();
+  }
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.usersService.findOne(+id);

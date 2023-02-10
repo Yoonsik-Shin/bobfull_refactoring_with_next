@@ -18,6 +18,7 @@ const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const bcrypt = require("bcrypt");
 const dist_1 = require("@nestjs/passport/dist");
+const multer_1 = require("multer");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -28,6 +29,10 @@ let UsersController = class UsersController {
     }
     fetchUser(req) {
         return this.usersService.findOne({ email: req.user.email });
+    }
+    uploadProfileImg(req) {
+        const upload = (0, multer_1.default)();
+        return this.usersService.profileImgUpload();
     }
 };
 __decorate([
@@ -45,6 +50,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "fetchUser", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "uploadProfileImg", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

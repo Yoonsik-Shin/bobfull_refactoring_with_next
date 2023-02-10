@@ -53,6 +53,7 @@ let UsersService = class UsersService {
     remove(id) {
         return `This action removes a #${id} user`;
     }
+    profileImgUpload() { }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

@@ -225,3 +225,20 @@ $ yarn add passport-kakao
 $ yarn add -D @types/passport-kakao
 ```
 
+
+
+파일업로드
+
+https://github.com/expressjs/multer/blob/master/doc/README-ko.md
+
+```bash
+$ yarn add multer
+$ yarn add @types/multer --dev
+
+$ yarn add @google-cloud/storage
+
+$ yarn add --dev aws-sdk
+$ yarn add multer-s3
+yarn add @types/multer-s3 --dev
+```
+
