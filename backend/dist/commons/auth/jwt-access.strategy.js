@@ -30,7 +30,7 @@ let JwtAccessStrategy = class JwtAccessStrategy extends (0, passport_1.PassportS
     async validate(payload) {
         const { email } = payload;
         const user = await this.userRepositiory.findOne({
-            relations: ['userprofile'],
+            relations: ['userProfile, userProfileImg'],
             where: { email },
         });
         console.log(user);

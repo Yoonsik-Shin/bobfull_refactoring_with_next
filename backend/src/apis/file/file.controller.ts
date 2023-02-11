@@ -27,12 +27,12 @@ export class FileController {
     return this.fileService.uploadFile({ file });
   }
 
-  // @Post('/uploads')
-  // @UseInterceptors(FilesInterceptor('files'))
-  // uploadFiles(
-  //   @UploadedFiles() files: Array<Express.Multer.File>, //
-  // ) {
-  //   // console.log(files);
-  //   return this.fileService.uploadFiles({ files });
-  // }
+  @Post('/uploads')
+  @UseInterceptors(FilesInterceptor('files'))
+  uploadFiles(
+    @UploadedFiles() files: Array<Express.Multer.File>, //
+  ) {
+    // console.log(files);
+    return this.fileService.uploadFiles({ files });
+  }
 }

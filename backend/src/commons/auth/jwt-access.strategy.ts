@@ -19,7 +19,7 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'myGuard') {
   async validate(payload) {
     const { email } = payload;
     const user = await this.userRepositiory.findOne({
-      relations: ['userprofile'],
+      relations: ['userProfile, userProfileImg'],
       where: { email },
     });
 

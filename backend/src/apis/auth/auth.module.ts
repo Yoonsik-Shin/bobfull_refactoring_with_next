@@ -10,11 +10,12 @@ import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
 import { JwtGoogleStrategy } from 'src/commons/auth/jwt-social-google.strategy';
 import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kako.strategy';
 import { JwtNaverStrategy } from 'src/commons/auth/jwt-social-naver.strategy';
+import { UserProfileImg } from '../users/entities/user.profile.img.entity';
 
 @Module({
   imports: [
     JwtModule.register({}), //
-    TypeOrmModule.forFeature([User, UserProfile]),
+    TypeOrmModule.forFeature([User, UserProfile, UserProfileImg]),
   ],
   controllers: [AuthController],
   providers: [

@@ -69,3 +69,12 @@ const result = await axios({
 (o) import * as multerS3 from 'multer-s3';
 ```
 
+
+
+- 내장모듈인 `path` 가 안읽어지는 이유
+
+```typescript
+(x) import path from 'path';
+(o) import * as path from 'path';
+```
+
