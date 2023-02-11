@@ -8,16 +8,23 @@ import {
   Delete,
   UseGuards,
   Request,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport/dist';
+import { FileService } from '../file/file.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService, //
+    private readonly fileService: FileService,
+  ) {}
 
   @Post('/signup')
   async create(@Body() createUserDto: CreateUserDto) {
@@ -35,6 +42,18 @@ export class UsersController {
     return this.usersService.findOne({ email: req.user.email });
   }
 
+  @Post('/upload')
+  @UseGuards(AuthGuard('myGuard'))
+  @UseInterceptors(FileInterceptor('file'))
+  uploadProfileImg(
+    @UploadedFile() file: Express.MulterS3.File, //
+    @Request() req: any,
+  ) {
+    const profileImage = this.fileService.uploadFile({ file });
+    const email = req.user.email;
+
+    return this.usersService.imgUpload({ email, profileImage });
+  }
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.usersService.findOne(+id);

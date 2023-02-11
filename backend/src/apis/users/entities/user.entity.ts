@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserProfile } from './user.profile.entity';
+import { UserProfileImg } from './user.profile.img.entity';
 
 @Entity()
 @Unique(['email', 'nickname'])
@@ -37,5 +38,9 @@ export class User {
 
   @JoinColumn()
   @OneToOne(() => UserProfile)
-  userprofile: UserProfile;
+  userProfile: UserProfile;
+
+  @JoinColumn()
+  @OneToOne(() => UserProfileImg)
+  userProfileImg: UserProfileImg;
 }

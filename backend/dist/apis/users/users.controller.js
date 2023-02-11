@@ -18,9 +18,12 @@ const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const bcrypt = require("bcrypt");
 const dist_1 = require("@nestjs/passport/dist");
+const file_service_1 = require("../file/file.service");
+const platform_express_1 = require("@nestjs/platform-express");
 let UsersController = class UsersController {
-    constructor(usersService) {
+    constructor(usersService, fileService) {
         this.usersService = usersService;
+        this.fileService = fileService;
     }
     async create(createUserDto) {
         const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
@@ -28,6 +31,11 @@ let UsersController = class UsersController {
     }
     fetchUser(req) {
         return this.usersService.findOne({ email: req.user.email });
+    }
+    uploadProfileImg(file, req) {
+        const profileImage = this.fileService.uploadFile({ file });
+        const email = req.user.email;
+        return this.usersService.imgUpload({ email, profileImage });
     }
 };
 __decorate([
@@ -45,9 +53,20 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "fetchUser", null);
+__decorate([
+    (0, common_1.Post)('/upload'),
+    (0, common_1.UseGuards)((0, dist_1.AuthGuard)('myGuard')),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "uploadProfileImg", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        file_service_1.FileService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

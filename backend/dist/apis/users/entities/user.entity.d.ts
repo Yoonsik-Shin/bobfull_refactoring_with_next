@@ -1,4 +1,5 @@
 import { UserProfile } from './user.profile.entity';
+import { UserProfileImg } from './user.profile.img.entity';
 export declare class User {
     id: string;
     email: string;
@@ -7,5 +8,6 @@ export declare class User {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;
-    userprofile: UserProfile;
+    userProfile: UserProfile;
+    userProfileImg: UserProfileImg;
 }

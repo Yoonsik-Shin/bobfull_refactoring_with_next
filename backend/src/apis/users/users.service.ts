@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { UserProfile } from './entities/user.profile.entity';
+import { UserProfileImg } from './entities/user.profile.img.entity';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,9 @@ export class UsersService {
 
     @InjectRepository(UserProfile)
     private readonly userProfileRepository: Repository<UserProfile>,
+
+    @InjectRepository(UserProfileImg)
+    private readonly userProfileImgRepository: Repository<UserProfileImg>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -25,25 +29,37 @@ export class UsersService {
     if (user) throw new ConflictException('이미 등록된 이메일입니다.');
 
     const userProfileSave = await this.userProfileRepository.save({});
-
     const userSave = await this.userRepository.save({
       email,
       password,
-      userprofile: userProfileSave,
+      userProfile: userProfileSave,
     });
 
     return userSave;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async imgUpload({ email, profileImage }) {
+    const user = await this.userRepository.findOne({ where: { email } });
+    const userImgSave = await this.userProfileImgRepository.save({
+      profileImage,
+    });
+    const userSave = await this.userRepository.save({
+      ...user,
+      userProfileImg: userImgSave,
+    });
+
+    return userSave;
   }
 
   async findOne({ email }) {
     return await this.userRepository.findOne({
       where: { email },
-      relations: ['userprofile'],
+      relations: ['userProfile', 'userProfileImg'],
     });
+  }
+
+  findAll() {
+    return `This action returns all users`;
   }
 
   update(id: number) {
@@ -53,4 +69,6 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  profileImgUpload() {}
 }

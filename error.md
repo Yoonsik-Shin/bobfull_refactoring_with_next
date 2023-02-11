@@ -54,4 +54,27 @@ const result = await axios({
 
 
 - **SyntaxError****:** **Cannot use import statement outside a module**
-  - 정의되지 않은 함수를 import 하려고 하였음 
+  - 정의되지 않은 함수를 import 하려고 하였음
+
+  
+
+  
+
+  
+
+-  TypeError: (0 , multer_s3_1.default) is not a function
+
+```bash
+(x) import multerS3 from 'multer-s3';  
+(o) import * as multerS3 from 'multer-s3';
+```
+
+
+
+- 내장모듈인 `path` 가 안읽어지는 이유
+
+```typescript
+(x) import path from 'path';
+(o) import * as path from 'path';
+```
+

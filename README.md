@@ -54,9 +54,18 @@
 #### 1-2. 개선점
 
 - JWT토큰은 복호화될 수 있기 때문에 중요한 정보를 담아서는 안됨
+
 - refreshToken을 Cookie방식으로 저장하여 `HttpOnly`와 `Secure` 옵션으로 보안을 신경써서 구현
+
 - accessToken이 만료시 자동으로 refreshToken을 이용해 새로운 accessToken을 받아와 인가되도록 구현
+
 - `recoil`과 `react-query`를 활용하여 로그인 계정 상태관리 구현
+
+- 이메일 인증 or 핸드폰 인증 과정 추가
+
+- 비밀번호 찾기, 아이디 찾기 기능 추가
+
+- 휴면 계정 기능 추가
 
    
 
@@ -214,5 +223,22 @@ yarn add @nestjs/config
 ```bash
 $ yarn add passport-kakao
 $ yarn add -D @types/passport-kakao
+```
+
+
+
+파일업로드
+
+https://github.com/expressjs/multer/blob/master/doc/README-ko.md
+
+```bash
+$ yarn add multer
+$ yarn add @types/multer --dev
+
+$ yarn add @google-cloud/storage
+
+$ yarn add --dev aws-sdk
+$ yarn add multer-s3
+yarn add @types/multer-s3 --dev
 ```
 

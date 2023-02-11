@@ -12,6 +12,7 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const auth_module_1 = require("./apis/auth/auth.module");
 const community_module_1 = require("./apis/communities/community.module");
+const file_module_1 = require("./apis/file/file.module");
 const users_module_1 = require("./apis/users/users.module");
 let AppModule = class AppModule {
 };
@@ -20,6 +21,7 @@ AppModule = __decorate([
         imports: [
             auth_module_1.AuthModule,
             community_module_1.CommunityModule,
+            file_module_1.FileModule,
             users_module_1.UsersModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',

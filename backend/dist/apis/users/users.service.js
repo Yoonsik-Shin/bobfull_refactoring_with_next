@@ -18,10 +18,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entities/user.entity");
 const user_profile_entity_1 = require("./entities/user.profile.entity");
+const user_profile_img_entity_1 = require("./entities/user.profile.img.entity");
 let UsersService = class UsersService {
-    constructor(userRepository, userProfileRepository) {
+    constructor(userRepository, userProfileRepository, userProfileImgRepository) {
         this.userRepository = userRepository;
         this.userProfileRepository = userProfileRepository;
+        this.userProfileImgRepository = userProfileImgRepository;
     }
     async create(createUserDto) {
         const { email, password } = createUserDto;
@@ -34,18 +36,26 @@ let UsersService = class UsersService {
         const userSave = await this.userRepository.save({
             email,
             password,
-            userprofile: userProfileSave,
+            userProfile: userProfileSave,
         });
         return userSave;
     }
-    findAll() {
-        return `This action returns all users`;
+    async imgUpload({ email, profileImage }) {
+        const user = await this.userRepository.findOne({ where: { email } });
+        const userImgSave = await this.userProfileImgRepository.save({
+            profileImage,
+        });
+        const userSave = await this.userRepository.save(Object.assign(Object.assign({}, user), { userProfileImg: userImgSave }));
+        return userSave;
     }
     async findOne({ email }) {
         return await this.userRepository.findOne({
             where: { email },
-            relations: ['userprofile'],
+            relations: ['userProfile', 'userProfileImg'],
         });
+    }
+    findAll() {
+        return `This action returns all users`;
     }
     update(id) {
         return `This action updates a #${id} user`;
@@ -53,12 +63,15 @@ let UsersService = class UsersService {
     remove(id) {
         return `This action removes a #${id} user`;
     }
+    profileImgUpload() { }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(1, (0, typeorm_1.InjectRepository)(user_profile_entity_1.UserProfile)),
+    __param(2, (0, typeorm_1.InjectRepository)(user_profile_img_entity_1.UserProfileImg)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], UsersService);
 exports.UsersService = UsersService;

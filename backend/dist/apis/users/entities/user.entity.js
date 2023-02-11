@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const user_profile_entity_1 = require("./user.profile.entity");
+const user_profile_img_entity_1 = require("./user.profile.img.entity");
 let User = class User {
 };
 __decorate([
@@ -46,7 +47,12 @@ __decorate([
     (0, typeorm_1.JoinColumn)(),
     (0, typeorm_1.OneToOne)(() => user_profile_entity_1.UserProfile),
     __metadata("design:type", user_profile_entity_1.UserProfile)
-], User.prototype, "userprofile", void 0);
+], User.prototype, "userProfile", void 0);
+__decorate([
+    (0, typeorm_1.JoinColumn)(),
+    (0, typeorm_1.OneToOne)(() => user_profile_img_entity_1.UserProfileImg),
+    __metadata("design:type", user_profile_img_entity_1.UserProfileImg)
+], User.prototype, "userProfileImg", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)(),
     (0, typeorm_1.Unique)(['email', 'nickname'])
