@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start:dev
+  C:\Program Files\nodejs\node.exe C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add bodyParser
 
 PATH: 
   C:\Users\pocke\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\pocke\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\sqlite;C:\Program Files\dotnet;C:\Program Files\nodejs;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PuTTY;C:\Program Files (x86)\PuTTY;C:\Program Files\Docker\Docker\resources\bin;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\pocke\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\pocke\AppData\Local\Programs\Python\Python310;C:\Users\pocke\AppData\Local\Microsoft\WindowsApps;C:\Users\pocke\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pocke\AppData\Roaming\npm;C:\Users\pocke\AppData\Local\gitkraken\bin;C:\Users\pocke\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\msys64\mingw64\bin;C:\mongosh-1.6.1-win32-x64\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,12 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Users\pocke\Desktop\bobfull_refactoring_with_next\backend\package.json: Unexpected token : in JSON at position 148
-      at JSON.parse (<anonymous>)
-      at C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1629:59
-      at Generator.next (<anonymous>)
-      at step (C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+  Error: https://registry.yarnpkg.com/bodyParser: Not found
+      at Request.params.callback [as _callback] (C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+      at Request.self.callback (C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
+      at Request.emit (node:events:513:28)
+      at Request.<anonymous> (C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
+      at Request.emit (node:events:513:28)
+      at IncomingMessage.<anonymous> (C:\Users\pocke\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
+      at Object.onceWrapper (node:events:627:28)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1358:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
@@ -29,7 +34,6 @@ npm manifest:
     "author": "",
     "private": true,
     "license": "UNLICENSED",
-    "types": "module",: ,
     "scripts": {
       "build": "nest build",
       "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

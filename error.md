@@ -78,3 +78,18 @@ const result = await axios({
 (o) import * as path from 'path';
 ```
 
+
+
+- PayloadTooLargeError: request entity too large
+
+![image-20230212105912864](error.assets/image-20230212105912864.png)
+
+![image-20230212110654775](error.assets/image-20230212110654775.png)
+
+
+
+
+
+```bash
+$ yarn add form-data
+```

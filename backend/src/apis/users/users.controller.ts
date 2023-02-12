@@ -45,11 +45,11 @@ export class UsersController {
   @Post('/upload')
   @UseGuards(AuthGuard('myGuard'))
   @UseInterceptors(FileInterceptor('file'))
-  uploadProfileImg(
+  async uploadProfileImg(
     @UploadedFile() file: Express.MulterS3.File, //
     @Request() req: any,
   ) {
-    const profileImage = this.fileService.uploadFile({ file });
+    const profileImage = await this.fileService.uploadFile({ file });
     const email = req.user.email;
 
     return this.usersService.imgUpload({ email, profileImage });

@@ -39,13 +39,13 @@ let AuthController = class AuthController {
         return this.authService.getAccessToken({ user: req.user });
     }
     async loginGoogle(req, res) {
-        this.authService.loginOAuth({ req, res });
+        return this.authService.loginOAuth({ req, res });
     }
     async loginKakao(req, res) {
-        this.authService.loginOAuth({ req, res });
+        return this.authService.loginOAuth({ req, res });
     }
     async loginNaver(req, res) {
-        this.authService.loginOAuth({ req, res });
+        return this.authService.loginOAuth({ req, res });
     }
 };
 __decorate([

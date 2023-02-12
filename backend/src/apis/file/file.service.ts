@@ -7,7 +7,7 @@ export class FileService {
       throw new BadRequestException('파일이 존재하지 않습니다.');
     }
 
-    return { filePath: file.location };
+    return file.location;
   }
 
   async uploadFiles({ files }) {

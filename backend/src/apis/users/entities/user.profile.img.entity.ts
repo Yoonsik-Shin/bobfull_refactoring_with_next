@@ -5,6 +5,6 @@ export class UserProfileImg {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ default: null })
   profileImage: string;
 }

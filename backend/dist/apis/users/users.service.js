@@ -33,20 +33,23 @@ let UsersService = class UsersService {
         if (user)
             throw new common_1.ConflictException('이미 등록된 이메일입니다.');
         const userProfileSave = await this.userProfileRepository.save({});
+        const userImgSave = await this.userProfileImgRepository.save({});
         const userSave = await this.userRepository.save({
             email,
             password,
             userProfile: userProfileSave,
+            userProfileImg: userImgSave,
         });
         return userSave;
     }
     async imgUpload({ email, profileImage }) {
-        const user = await this.userRepository.findOne({ where: { email } });
-        const userImgSave = await this.userProfileImgRepository.save({
-            profileImage,
+        const user = await this.userRepository.findOne({
+            where: { email },
+            relations: ['userProfile', 'userProfileImg'],
         });
-        const userSave = await this.userRepository.save(Object.assign(Object.assign({}, user), { userProfileImg: userImgSave }));
-        return userSave;
+        const userImgSave = await this.userProfileImgRepository.update({ id: user.userProfileImg.id }, { profileImage });
+        console.log(userImgSave);
+        return user;
     }
     async findOne({ email }) {
         return await this.userRepository.findOne({

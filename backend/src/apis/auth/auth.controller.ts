@@ -66,7 +66,7 @@ export class AuthController {
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    this.authService.loginOAuth({ req, res });
+    return this.authService.loginOAuth({ req, res });
   }
 
   @Get('/login/kakao')
@@ -75,7 +75,7 @@ export class AuthController {
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    this.authService.loginOAuth({ req, res });
+    return this.authService.loginOAuth({ req, res });
   }
 
   @Get('/login/naver')
@@ -84,6 +84,6 @@ export class AuthController {
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    this.authService.loginOAuth({ req, res });
+    return this.authService.loginOAuth({ req, res });
   }
 }
