@@ -56,5 +56,7 @@ export class AuthService {
     this.setRefreshToken({ user, res });
 
     res.redirect('http://localhost:3001');
+
+    return this.getAccessToken({ user });
   }
 }

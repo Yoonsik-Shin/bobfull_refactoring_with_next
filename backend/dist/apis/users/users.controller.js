@@ -32,8 +32,8 @@ let UsersController = class UsersController {
     fetchUser(req) {
         return this.usersService.findOne({ email: req.user.email });
     }
-    uploadProfileImg(file, req) {
-        const profileImage = this.fileService.uploadFile({ file });
+    async uploadProfileImg(file, req) {
+        const profileImage = await this.fileService.uploadFile({ file });
         const email = req.user.email;
         return this.usersService.imgUpload({ email, profileImage });
     }
@@ -61,7 +61,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "uploadProfileImg", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),

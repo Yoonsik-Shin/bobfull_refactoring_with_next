@@ -14,7 +14,6 @@ interface ILayoutProps {
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
-  console.log(isHiddenHeader);
 
   return (
     <L style={{ minHeight: "100vh" }}>

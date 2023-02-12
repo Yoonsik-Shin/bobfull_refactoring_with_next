@@ -12,23 +12,12 @@ export declare class UsersService {
         email: string;
         password: string;
         userProfile: UserProfile;
+        userProfileImg: UserProfileImg;
     } & User>;
     imgUpload({ email, profileImage }: {
         email: any;
         profileImage: any;
-    }): Promise<{
-        userProfileImg: {
-            profileImage: any;
-        } & UserProfileImg;
-        id: string;
-        email: string;
-        password: string;
-        nickname: string;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date;
-        userProfile: UserProfile;
-    } & User>;
+    }): Promise<User>;
     findOne({ email }: {
         email: any;
     }): Promise<User>;

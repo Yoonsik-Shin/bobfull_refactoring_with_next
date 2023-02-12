@@ -14,5 +14,5 @@ export declare class AuthService {
     loginOAuth({ req, res }: {
         req: any;
         res: any;
-    }): Promise<void>;
+    }): Promise<string>;
 }
