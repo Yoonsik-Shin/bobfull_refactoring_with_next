@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import LoginUI from "./login.presenter";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
-import { accessTokenState } from "@/commons/store";
+import { accessTokenState, isLoginState } from "@/commons/store";
 
 export default function Login() {
   const { register, handleSubmit, formState } = useForm<IFormData>({
@@ -12,6 +12,7 @@ export default function Login() {
     // mode: "onChange", // 입력할때마다 입력검증
   });
   const setAccessToken = useSetRecoilState(accessTokenState);
+  const setIsLogin = useSetRecoilState(isLoginState);
   const router = useRouter();
 
   return (
@@ -21,6 +22,7 @@ export default function Login() {
       formState={formState}
       router={router}
       setAccessToken={setAccessToken}
+      setIsLogin={setIsLogin}
     />
   );
 }

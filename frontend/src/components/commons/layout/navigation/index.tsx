@@ -1,68 +1,66 @@
-import { Layout, Menu } from "antd";
-import { useState } from "react";
-import type { MenuProps } from "antd";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import FolderIcon from "@mui/icons-material/Folder";
+import RestoreIcon from "@mui/icons-material/Restore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
+import { NextLinkComposed } from "../../routers/Link";
+import { isLoginState } from "@/commons/store";
+import { useRecoilValue } from "recoil";
 
 export default function LayoutSider() {
-  const { Sider } = Layout;
-  const [collapsed, setCollapsed] = useState(false);
+  const [value, setValue] = React.useState("recents");
+  const isLogin = useRecoilValue(isLoginState);
 
-  type MenuItem = Required<MenuProps>["items"][number];
-
-  function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[]
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem;
-  }
-
-  const items: MenuItem[] = [
-    getItem("Option 1", "1", <PieChartOutlined />),
-    getItem("Option 2", "2", <DesktopOutlined />),
-    getItem("User", "sub1", <UserOutlined />, [
-      getItem("Tom", "3"),
-      getItem("Bill", "4"),
-      getItem("Alex", "5"),
-    ]),
-    getItem("Team", "sub2", <TeamOutlined />, [
-      getItem("Team 1", "6"),
-      getItem("Team 2", "8"),
-    ]),
-    getItem("Files", "9", <FileOutlined />),
-  ];
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
   return (
-    <Sider
-      collapsible
-      collapsed={collapsed}
-      onCollapse={(value) => setCollapsed(value)}
+    <BottomNavigation
+      sx={{ position: "sticky", bottom: 0, left: 0 }}
+      value={value}
+      onChange={handleChange}
     >
-      <div
-        style={{
-          height: 32,
-          margin: 16,
-          background: "rgba(255, 255, 255, 0.2)",
-        }}
+      {isLogin ? (
+        <BottomNavigationAction
+          component={NextLinkComposed}
+          to={{ pathname: "/profile" }}
+          label="Profile"
+          value="Profile"
+          icon={<RestoreIcon />}
+        />
+      ) : (
+        <BottomNavigationAction
+          component={NextLinkComposed}
+          to={{ pathname: "/login" }}
+          label="Login"
+          value="Login"
+          icon={<RestoreIcon />}
+        />
+      )}
+      <BottomNavigationAction
+        component={NextLinkComposed}
+        to={{ pathname: "/signup" }}
+        label="Signup"
+        value="Signup"
+        icon={<FavoriteIcon />}
       />
-      <Menu
-        theme="dark"
-        defaultSelectedKeys={["1"]}
-        mode="inline"
-        items={items}
+      <BottomNavigationAction
+        component={NextLinkComposed}
+        to={{ pathname: "/" }}
+        label="None"
+        value="None"
+        icon={<LocationOnIcon />}
       />
-    </Sider>
+      <BottomNavigationAction
+        component={NextLinkComposed}
+        to={{ pathname: "/" }}
+        label="home"
+        value="home"
+        icon={<FolderIcon />}
+      />
+    </BottomNavigation>
   );
 }

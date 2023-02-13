@@ -10,6 +10,7 @@ export interface IFormData {
 export interface IVariable {
   router: NextRouter;
   setAccessToken: SetterOrUpdater<string>;
+  setIsLogin: SetterOrUpdater<string>;
 }
 
 export const schema = yup.object({
