@@ -2,7 +2,7 @@ import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
 import { IFormData, IVariable } from "./login.types";
 
 export const onClickSubmit =
-  ({ router, setAccessToken }: IVariable) =>
+  ({ router, setAccessToken, setIsLogin }: IVariable) =>
   async (data: IFormData) => {
     try {
       // 1. 로그인해서 accessToken 받아오기
@@ -21,6 +21,7 @@ export const onClickSubmit =
         return;
       }
       setAccessToken(accessToken);
+      setIsLogin(true);
       alert("로그인에 성공하셨습니다.");
 
       // 3. 로그인 성공페이지로 이동하기

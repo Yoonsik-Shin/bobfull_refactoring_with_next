@@ -1,12 +1,23 @@
 import { onClickSubmit } from "./login.queries";
 
 export default function LoginUI(props) {
-  const { register, handleSubmit, formState, router, setAccessToken } = props;
+  const {
+    register,
+    handleSubmit,
+    formState,
+    router,
+    setAccessToken,
+    setIsLogin,
+  } = props;
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return (
     <>
-      <form onSubmit={handleSubmit(onClickSubmit({ router, setAccessToken }))}>
+      <form
+        onSubmit={handleSubmit(
+          onClickSubmit({ router, setAccessToken, setIsLogin })
+        )}
+      >
         이메일: <input type="text" {...register("email")} />
         <div>{formState.errors.email?.message}</div>
         비밀번호: <input type="password" {...register("password")} />
