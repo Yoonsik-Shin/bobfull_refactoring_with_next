@@ -47,6 +47,9 @@ let AuthController = class AuthController {
     async loginNaver(req, res) {
         return this.authService.loginOAuth({ req, res });
     }
+    async logout(req, res) {
+        return this.authService.logout({ res });
+    }
 };
 __decorate([
     (0, common_1.Post)('/login'),
@@ -91,6 +94,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "loginNaver", null);
+__decorate([
+    (0, common_1.Post)('/logout'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logout", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

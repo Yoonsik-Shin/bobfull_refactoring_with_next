@@ -7,6 +7,7 @@ import {
   Req,
   Get,
   UseGuards,
+  Headers,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
@@ -30,7 +31,7 @@ export class AuthController {
   @Post('/login')
   async login(
     @Body() authDto: AuthDto, //
-    @Res({ passthrough: true }) res: any,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const { email, password } = authDto;
 
@@ -55,7 +56,7 @@ export class AuthController {
   @Post('/restore')
   @UseGuards(AuthGuard('refresh'))
   restoreAccessToken(
-    @Req() req: any, //
+    @Req() req: Request, //
   ) {
     return this.authService.getAccessToken({ user: req.user });
   }
@@ -85,5 +86,13 @@ export class AuthController {
     @Res() res: Response,
   ) {
     return this.authService.loginOAuth({ req, res });
+  }
+
+  @Post('/logout')
+  async logout(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response, //
+  ) {
+    return this.authService.logout({ res });
   }
 }

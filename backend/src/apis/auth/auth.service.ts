@@ -55,8 +55,15 @@ export class AuthService {
     // 3. 로그인
     this.setRefreshToken({ user, res });
 
-    res.redirect('http://localhost:3001');
+    res.redirect('http://localhost:3001/profile');
 
     return this.getAccessToken({ user });
+  }
+
+  async logout({ res }) {
+    res.removeHeader('authorization');
+    res.cookie('refreshToken', '', {
+      maxAge: 0,
+    });
   }
 }

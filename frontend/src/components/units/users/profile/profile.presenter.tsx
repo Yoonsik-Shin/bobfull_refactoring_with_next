@@ -1,5 +1,10 @@
 export default function ProfileUI(props) {
-  const { userInfo, onClickProfileUpdate } = props;
+  const {
+    userInfo,
+    onClickProfileImageUpdate,
+    onClickProfileUpdate,
+    onClickLogout,
+  } = props;
   const { nickname, email, id, createdAt, userProfile, userProfileImg } =
     userInfo;
   const { alchol, gender, smoke, speed, talk } = userProfile || {};
@@ -13,7 +18,7 @@ export default function ProfileUI(props) {
         alt="회원프로필"
         style={{ width: "75px", height: "75px", borderRadius: "50%" }}
       />
-      <button onClick={onClickProfileUpdate}>회원프로필수정</button>
+      <button onClick={onClickProfileImageUpdate}>프로필사진수정</button>
       <div>회원가입일: {createdAt}</div>
       <div>닉네임: {nickname}</div>
       <div>이메일: {email}</div>
@@ -29,6 +34,8 @@ export default function ProfileUI(props) {
         {speed === 4 ? "빨라요!" : ""}
         {speed === 5 ? "엄청 빨라요!" : ""}
       </div>
+      <button onClick={onClickProfileUpdate}>회원정보수정</button>
+      <button onClick={onClickLogout}>로그아웃</button>
     </>
   );
 }
