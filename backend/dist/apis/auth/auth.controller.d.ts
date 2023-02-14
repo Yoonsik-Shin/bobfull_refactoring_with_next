@@ -10,10 +10,11 @@ export declare class AuthController {
     private readonly authService;
     private readonly userService;
     constructor(authService: AuthService, userService: UsersService);
-    login(authDto: AuthDto, res: any): Promise<string>;
-    restoreAccessToken(req: any): string;
+    login(authDto: AuthDto, res: Response): Promise<string>;
+    restoreAccessToken(req: Request): string;
     loginGoogle(req: Request & IOAuthUser, res: Response): Promise<string>;
     loginKakao(req: Request & IOAuthUser, res: Response): Promise<string>;
     loginNaver(req: Request & IOAuthUser, res: Response): Promise<string>;
+    logout(req: Request, res: Response): Promise<void>;
 }
 export {};

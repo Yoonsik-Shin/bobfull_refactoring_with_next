@@ -7,7 +7,7 @@ import { accessTokenState } from "@/commons/store";
 import FormData from "form-data";
 import { useRouter } from "next/router";
 
-export default function ProfileUpdatePage() {
+export default function ProfileImageUpdatePage() {
   const { userInfo } = useFecthUser();
   const { nickname, email, id, createdAt, userProfile, userProfileImg } =
     userInfo;

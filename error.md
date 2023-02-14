@@ -90,6 +90,47 @@ const result = await axios({
 
 
 
-```bash
-$ yarn add form-data
+-**Error****:** **Text** **content** **does** **not** **match** **server-rendered** **HTML.**
+
+**Error****:** **Hydration** **failed** **because** **the** **initial** **UI** **does** **not** **match** **what** **was** **rendered** **on** **the** **server.**
+
+**Error****:** **There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering.**
+
+recoilstate를 사용하여 삼항연산자를 사용해서 그런듯?
+
+서버사이드렌더링시 recoilstate의 조건을 읽지 못해서 나타나는 현상
+
+- useState와 useEffect를 사용하여 렌더링시 useState값에 세팅되도록 설정
+
+```typescript
+	const isLogin = useRecoilValue(isLoginState);
+  const [isLogined, setIsLogined] = useState(false);
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    setIsLogined(isLogin);  
+  });
+
+  return (
+			...
+      {isLogined ? (
+        <BottomNavigationAction
+          component={NextLinkComposed}
+          to={{ pathname: "/profile" }}
+          label="Profile"
+          value="Profile"
+          icon={<RestoreIcon />}
+        />
+      ) : (
+        <BottomNavigationAction
+          component={NextLinkComposed}
+          to={{ pathname: "/login" }}
+          label="Login"
+          value="Login"
+          icon={<RestoreIcon />}
+        />
+      )}
 ```
+

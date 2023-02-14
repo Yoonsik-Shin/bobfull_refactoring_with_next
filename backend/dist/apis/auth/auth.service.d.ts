@@ -15,4 +15,7 @@ export declare class AuthService {
         req: any;
         res: any;
     }): Promise<string>;
+    logout({ res }: {
+        res: any;
+    }): Promise<void>;
 }

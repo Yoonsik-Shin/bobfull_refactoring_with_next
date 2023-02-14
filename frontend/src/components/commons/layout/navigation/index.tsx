@@ -4,7 +4,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NextLinkComposed } from "../../routers/Link";
 import { isLoginState } from "@/commons/store";
 import { useRecoilValue } from "recoil";
@@ -12,10 +12,14 @@ import { useRecoilValue } from "recoil";
 export default function LayoutSider() {
   const [value, setValue] = React.useState("recents");
   const isLogin = useRecoilValue(isLoginState);
-
+  const [isLogined, setIsLogined] = useState(false);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    setIsLogined(isLogin);
+  });
 
   return (
     <BottomNavigation
@@ -23,7 +27,7 @@ export default function LayoutSider() {
       value={value}
       onChange={handleChange}
     >
-      {isLogin ? (
+      {isLogined ? (
         <BottomNavigationAction
           component={NextLinkComposed}
           to={{ pathname: "/profile" }}
