@@ -246,3 +246,11 @@ $ yarn add multer-s3
 yarn add @types/multer-s3 --dev
 ```
 
+
+
+백엔드에서 쿠키다루기
+
+```bash
+$ yarn add cookie-parser @types/cookie-parser
+```
+

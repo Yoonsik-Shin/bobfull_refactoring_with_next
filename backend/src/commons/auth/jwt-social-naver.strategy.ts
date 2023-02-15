@@ -13,8 +13,6 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
   }
 
   async validate(accessToken, refreshToken, profile) {
-    // console.log(accessToken);
-    // console.log(refreshToken);
     console.log(profile);
     const user = {
       email: profile._json.email,

@@ -11,8 +11,6 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
   }
 
   async validate(accessToken, refreshToken, profile) {
-    console.log(profile);
-    console.log(profile);
     const profileJson = profile._json;
     const user = {
       email:

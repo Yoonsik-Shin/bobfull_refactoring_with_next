@@ -13,9 +13,6 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   async validate(accessToken, refreshToken, profile) {
-    // console.log(accessToken);
-    // console.log(refreshToken);
-    console.log(profile);
     const user = {
       email: profile._json.email,
       password: await bcrypt.hash(profile.id, 10),
