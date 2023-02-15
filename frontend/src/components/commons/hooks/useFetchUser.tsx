@@ -1,18 +1,21 @@
-import { accessTokenState } from "@/commons/store";
+import { accessTokenState, isLoginState } from "@/commons/store";
 import { fetchUser } from "@/components/units/users/profile/profile.queries";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 export function useFecthUser() {
   const router = useRouter();
-  const accessToken: string = useRecoilValue(accessTokenState);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userInfo, setUserInfo] = useState("");
 
   useEffect(() => {
-    fetchUser({ accessToken, router }).then((response) => {
-      setUserInfo(response);
-    });
+    fetchUser({ accessToken, router, setAccessToken, setIsLogin }).then(
+      (response) => {
+        setUserInfo(response);
+      }
+    );
   }, []);
 
   return {

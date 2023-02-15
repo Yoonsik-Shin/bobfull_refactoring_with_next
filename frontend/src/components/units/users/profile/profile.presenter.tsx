@@ -6,7 +6,7 @@ export default function ProfileUI(props) {
     onClickLogout,
   } = props;
   const { nickname, email, id, createdAt, userProfile, userProfileImg } =
-    userInfo;
+    userInfo || {};
   const { alchol, gender, smoke, speed, talk } = userProfile || {};
   const { profileImage } = userProfileImg || {};
 
