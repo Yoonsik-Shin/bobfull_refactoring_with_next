@@ -1,7 +1,7 @@
 import { useFecthUser } from "@/components/commons/hooks/useFetchUser";
-import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
+import { authorizedAxios } from "@/commons/lib/AuthorizedAxios";
 import { ChangeEvent, useRef, useState } from "react";
-import { checkValidationFile } from "@/components/commons/libraries/validationFile";
+import { checkValidationFile } from "@/components/commons/lib/validationFile";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "@/commons/store";
 import FormData from "form-data";
@@ -14,15 +14,15 @@ export default function ProfileImageUpdatePage() {
   // const { alchol, gender, smoke, speed, talk } = userProfile || {};
   const { profileImage } = userProfileImg || {};
   const [imageUrl, setImageUrl] = useState(profileImage);
-
   const fileRef = useRef<HTMLInputElement>(null);
   const accessToken = useRecoilValue(accessTokenState);
   const formData = new FormData();
-  const [data, setFormData] = useState();
+  const [data, setFormData] = useState<FormData>();
+  const [imgUpdate, setImgUpdate] = useState(false);
   const router = useRouter();
 
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file) return;
 
     const isValid = checkValidationFile(file);
@@ -38,6 +38,7 @@ export default function ProfileImageUpdatePage() {
     reader.onloadend = () => {
       setImageUrl(reader.result);
     };
+    setImgUpdate(true);
   };
 
   const onClickImage = () => {
@@ -63,7 +64,7 @@ export default function ProfileImageUpdatePage() {
 
   return (
     <>
-      <div>현재프로필</div>
+      {imgUpdate ? <div>변경될 프로필이미지</div> : <div>현재프로필이미지</div>}
       <img
         src={imageUrl ? imageUrl : profileImage}
         alt="회원프로필"

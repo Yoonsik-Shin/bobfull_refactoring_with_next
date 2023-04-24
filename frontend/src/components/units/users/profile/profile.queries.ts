@@ -1,9 +1,8 @@
-import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
-import { refreshAccessToken } from "@/commons/libraries/getRefreshAccessToken";
+import { authorizedAxios } from "@/commons/lib/AuthorizedAxios";
+import { refreshAccessToken } from "@/commons/lib/getRefreshAccessToken";
 import { IVariable } from "./profile.types";
 
 export const fetchUser = async ({
-  router,
   accessToken,
   setAccessToken,
   setIsLogin,

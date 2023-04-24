@@ -1,4 +1,4 @@
-import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
+import { authorizedAxios } from "@/commons/lib/AuthorizedAxios";
 import { accessTokenState, isLoginState } from "@/commons/store";
 import { useFecthUser } from "@/components/commons/hooks/useFetchUser";
 import { useRouter } from "next/router";
@@ -40,9 +40,9 @@ export default function Profile() {
 
   return (
     <ProfileUI
-      userInfo={userInfo} //
+      userInfo={userInfo}
       onClickProfileImageUpdate={onClickProfileImageUpdate}
-      onClickProfileUpdate-={onClickProfileUpdate}
+      onClickProfileUpdate={onClickProfileUpdate}
       onClickLogout={onClickLogout}
     />
   );

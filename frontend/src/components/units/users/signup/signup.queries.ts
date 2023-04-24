@@ -1,5 +1,5 @@
 import { IFormData } from "./signup.types";
-import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
+import { authorizedAxios } from "@/commons/lib/AuthorizedAxios";
 
 export const onClickSubmit = async (data: IFormData) => {
   const result = await authorizedAxios({

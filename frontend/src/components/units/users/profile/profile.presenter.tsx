@@ -34,8 +34,8 @@ export default function ProfileUI(props) {
         {speed === 4 ? "빨라요!" : ""}
         {speed === 5 ? "엄청 빨라요!" : ""}
       </div>
-      <button onClick={onClickProfileUpdate}>회원정보수정</button>
       <button onClick={onClickLogout}>로그아웃</button>
+      <button onClick={onClickProfileUpdate}>회원정보수정</button>
     </>
   );
 }
