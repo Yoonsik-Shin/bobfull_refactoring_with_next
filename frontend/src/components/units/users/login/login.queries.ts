@@ -1,4 +1,4 @@
-import { authorizedAxios } from "@/commons/libraries/AuthorizedAxios";
+import { authorizedAxios } from "@/commons/lib/AuthorizedAxios";
 import { IFormData, IVariable } from "./login.types";
 
 export const onClickSubmit =

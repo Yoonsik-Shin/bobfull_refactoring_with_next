@@ -1,4 +1,4 @@
-import CustomAxios from "@/commons/libraries/CustomAxios.setting";
+import CustomAxios from "@/commons/lib/CustomAxios.setting";
 import Layout from "@/components/commons/layout";
 import { globalStyles } from "@/components/commons/styles/globalStyles";
 import { Global } from "@emotion/react";
