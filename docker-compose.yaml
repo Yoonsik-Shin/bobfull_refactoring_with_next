@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - 3000:3000
+        env_file:
+            - ./frontend/.env
+        volumes:
+            - ./frontend/src:/frontend/src
+
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        env_file:
+            - ./backend/.env.docker
+        volumes:
+            - ./backend/src:/backend/src
+
+    mysql:
+        image: mysql
+        restart: always
+        env_file:
+            - ./backend/.env.docker
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql/db:/mysql/db
+
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_DATABASE: chat
+        ports:
+            - 27018:27017

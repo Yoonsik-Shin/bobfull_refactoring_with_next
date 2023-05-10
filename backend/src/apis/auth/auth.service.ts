@@ -30,7 +30,7 @@ export class AuthService {
     // res.send();
 
     // 배포환경
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001'); // front
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // front
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader(
       'Set-Cookie',
@@ -55,7 +55,7 @@ export class AuthService {
     // 3. 로그인
     this.setRefreshToken({ user, res });
 
-    res.redirect('http://localhost:3001/profile');
+    res.redirect('http://localhost:3000/profile');
 
     return this.getAccessToken({ user });
   }
