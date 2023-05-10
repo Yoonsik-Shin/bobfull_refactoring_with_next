@@ -12,6 +12,9 @@ export class RestaurantMenu {
   @Column()
   price: string;
 
+  @Column()
+  resId: number;
+
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.restaurantMenu)
   restaurant: Restaurant;
 }

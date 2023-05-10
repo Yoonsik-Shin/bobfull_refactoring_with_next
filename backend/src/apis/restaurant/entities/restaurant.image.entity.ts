@@ -9,6 +9,9 @@ export class RestaurantImage {
   @Column({ type: 'varchar', length: 2000 })
   image: string;
 
+  @Column()
+  resId: number;
+
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.restaurantImage)
   restaurant: Restaurant;
 }
