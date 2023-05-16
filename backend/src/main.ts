@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import { urlencoded, json } from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
+declare const module: any;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
@@ -20,6 +22,13 @@ async function bootstrap() {
   app.use(cookieParser());
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ limit: '50mb', extended: true }));
-  await app.listen(3000);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => {
+      app.close();
+    });
+  }
+  await app.listen(8000);
 }
 bootstrap();
