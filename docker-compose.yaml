@@ -5,23 +5,30 @@ services:
         build:
             context: ./frontend
             dockerfile: Dockerfile
+        restart: always
         ports:
             - 3000:3000
         env_file:
             - ./frontend/.env
         volumes:
-            - ./frontend/src:/frontend/src
+            - ./frontend/src/:/frontend/src/
+    #         # - /mnt/c/Users/pocke/Desktop/bobfull_refactoring_with_next/frontend/src/:/frontend/src/
 
     backend:
         build:
             context: ./backend
             dockerfile: Dockerfile
+        restart: always
         ports:
             - 8000:8000
         env_file:
             - ./backend/.env.docker
         volumes:
-            - ./backend/src:/backend/src
+            - ./backend/src/:/backend/src/
+            # - /mnt/c/Users/pocke/Desktop/bobfull_refactoring_with_next/backend/src/:/backend/src/
+        depends_on:
+            - mysql
+            - mongo
 
     mysql:
         image: mysql
@@ -30,8 +37,6 @@ services:
             - ./backend/.env.docker
         ports:
             - 3306:3306
-        volumes:
-            - ./mysql/db:/mysql/db
 
     mongo:
         image: mongo
@@ -40,3 +45,15 @@ services:
             MONGO_INITDB_DATABASE: chat
         ports:
             - 27018:27017
+# volumes:
+#     my_volume_front:
+#         driver: bind
+#         driver_opts:
+#             type: "wsl"
+#             device: "/mnt/c/Users/pocke/Desktop/bobfull_refactoring_with_next/frontend/src"
+
+#     my_volume_back:
+#         driver: bind
+#         driver_opts:
+#             type: "wsl"
+#             device: "/mnt/c/Users/pocke/Desktop/bobfull_refactoring_with_next/backend/src"
