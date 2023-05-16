@@ -7,6 +7,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import { RecoilRoot } from "recoil";
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:8000/chattings", {
+  withCredentials: true,
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());

@@ -9,7 +9,7 @@ export const onClickSubmit =
       const result = await authorizedAxios({
         method: "post",
         url: `/auth/login`,
-        data: data,
+        data,
       });
 
       const accessToken = result.data;
