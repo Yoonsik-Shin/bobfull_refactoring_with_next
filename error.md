@@ -134,3 +134,29 @@ recoilstate를 사용하여 삼항연산자를 사용해서 그런듯?
       )}
 ```
 
+
+
+
+
+docker nestjs 핫리로드 설정중에 발생한 오류
+
+서버시작 후 핫로딩이 발생하면 db와 연결이 끊기면서 서버가 다운된다.
+
+![image-20230510101059003](error.assets/image-20230510101059003.png)
+
+1. TypeOrmModule.forRoot()를 TypeOrmModule.forRootAsync({ useFactory: async () => ({}) }) 로 변경
+2. 기존 연결 해제 후 재연결
+
+```typescript
+// app.module.ts
+export class AppModule {
+  constructor(private connection: Connection) {
+    this.restaurantService.insertData();
+  }
+
+  async onModuleDestroy() {
+    await this.connection.close();
+  }
+}
+```
+

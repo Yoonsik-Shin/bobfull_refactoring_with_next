@@ -139,6 +139,35 @@ $ git config --local core.editor "code --wait"
 
 
 
+파일구조
+
+```bash
+├── frontend
+│    └── src # 모든 소스 코드 관리
+│        ├── commons # 전역에서 사용되는 요소들
+│        │   	├── lib # # 전역에서 사용되는 함수
+│        │   	└── store # recoil 설정
+│        │   	
+│        ├── components # 재활용 가능한 tsx 파일
+│        │   	├── commons # 공통으로 사용되는 tsx 파일
+│        │    │		  ├── hooks
+│        │    │		  ├── layout
+│        │    │		  ├── lib
+│        │    │		  ├── routers
+│        │    │		  └── styles
+│        │    └── units # page를 구성하는 jsx 파일 분리하여 관리
+│        │   	
+│        └── pages # router 파일
+│        
+├── backend
+│    └── src # 모든 소스 코드 관리
+└── run.sh
+```
+
+
+
+
+
 ##### FrontEnd
 
 Recoil
@@ -254,3 +283,14 @@ yarn add @types/multer-s3 --dev
 $ yarn add cookie-parser @types/cookie-parser
 ```
 
+
+
+```bash
+
+```
+
+
+
+ws cors 
+
+![image-20230506163939381](README.assets/image-20230506163939381.png)
